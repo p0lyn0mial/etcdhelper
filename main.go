@@ -156,6 +156,9 @@ func putKey(client *clientv3.Client, key, resFile string) error {
 		return err
 	}
 
+	// Remarks:
+	// Some resources or storage backends may only support a specific media type like JSON or Protobuf
+	// this is controlled via --storage-media-type flag which defaults to “application/vnd.kubernetes.protobuf”
 	objProto := &bytes.Buffer{}
 	encoder := protobufserializer.NewSerializer(scheme.Scheme, scheme.Scheme)
 	err = encoder.Encode(obj, objProto)
